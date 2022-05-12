@@ -1,8 +1,8 @@
 /*Name:    Malcolm M
  *Section: 3530.002
  *Date:    2/1/2022
- *Descr:   creates a count server for changing a sentence, counting
-	   characters in a sentence
+ *Descr:   creates a count server for changing a sentence, counting characters in a sentence
+ *Only runs on the cse machines at my school
 */
 
 #include <stdio.h>
@@ -18,20 +18,20 @@
 
 #define MAXSIZE 1024
 
-bool spaceLoc(char j){
+bool spaceLoc(char j){ //space character counter
     return 32 == j;
 }
 
-bool alphaLoc(char j){
+bool alphaLoc(char j){ //letter character counter
     return (64<j && j<91) || (96<j && j <123);
 }
 
-char uppercase(char j){
+char uppercase(char j){ //makes the given character uppercase
     if(64<j && j<91){ return j; }
     else return j-32;
 }
 
-char lowercase(char j){
+char lowercase(char j){ //makes the given character lowercase
     if(j >= 'A' && j <= 'Z'){ return j+32; }
     else return j;
 }
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
     portno = atoi(argv[1]);
     servaddr.sin_port = htons(portno);
 
-    //reuse the port number
+    //reuse the port number, since client can make multiple requests
     int on = 1;
     setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    //listen with backlog of 10
+    //listen with a queue of 10 entries; affects the max rate at which the server can accept new connections 
     if( listen( listenfd, 10 ) == -1){
         printf("listen error\n");
         exit(EXIT_FAILURE);
@@ -88,7 +88,6 @@ int main(int argc, char *argv[]) {
 		printf("accept error\n");
 		exit(EXIT_FAILURE);
 	}
-    //connfd = accept( listenfd, (struct sockaddr*) NULL, NULL);
 
     while(1) {
 	
@@ -120,7 +119,7 @@ int main(int argc, char *argv[]) {
                 countAlpha++;
             //count punctuation marks with a long if else branch
             if(message[i] == '.'){
-                if(message[i-1] == '.' && message[i+1] == '.'){ //if branch for ellipsis
+                if(message[i-1] == '.' && message[i+1] == '.'){ //if branch for counting ellipsis
                     i = i+2;
                     continue;
                 }
@@ -155,7 +154,7 @@ int main(int argc, char *argv[]) {
                 countPunc++;
             else if(message[i] == '\'')
                 countPunc++;
-            i++; //increment i to iterate through message
+            i++; //increment i to iterate through message character by character
         }
 
         //three variables to hold plain text

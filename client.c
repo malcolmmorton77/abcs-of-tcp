@@ -1,7 +1,9 @@
-/* Name: Malcolm M.
-   Date: 2/1/2022
-   Class:CSCE 3530.002
-   Descr:client side of tcp connection*/
+/* Name:   Malcolm M.
+ *Date:    2/1/2022
+ *Class:   CSCE 3530.002
+ *Descr:   client side of tcp connection
+ *Only runs on the cse machines at my school
+*/
 
 #include <sys/socket.h>
 #include <sys/types.h>
@@ -27,8 +29,8 @@ int main(int argc, char *argv[]) {
 
     //create socket for use and error check
     if((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0){
-	printf("socket error");
-	exit(EXIT_FAILURE);
+	    printf("socket error");
+	    exit(EXIT_FAILURE);
     }
 
     //assign IP, PORT
@@ -38,17 +40,16 @@ int main(int argc, char *argv[]) {
     inet_pton(AF_INET,"129.120.151.96",&(servaddr.sin_addr));
 
     if(connect(sockfd, (struct sockaddr*)&servaddr, sizeof(servaddr))<0){
-	printf("connect error\n");
-	exit(EXIT_FAILURE);
+        printf("connect error\n");
+        exit(EXIT_FAILURE);
     }
 
     while(1){
         
         bzero(message, sizeof(message));
         printf("\nGiven: ");
-        fgets(message, 40959, stdin);
-        //write the message to server
-        write(sockfd, message, strlen(message));
+        fgets(message, 40959, stdin); //get the message
+        write(sockfd, message, strlen(message)); //write the message to server
 
         //check if the user wants to quit
         if(strcmp(message, "quit\n") == 0 ) { exit(EXIT_SUCCESS); }
@@ -58,7 +59,7 @@ int main(int argc, char *argv[]) {
         printf("Return:");
         read(sockfd, message, sizeof(message));
         
-        //printf("The return from server says: %s", message);
+        //print the message to the terminal
         if(fputs(message, stdout) == EOF){
             printf("fputs error\n");
         }
