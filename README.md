@@ -14,16 +14,16 @@
 - provide the sentence/phrase on the client side
 
 #### Compile:
-1. type "make"
+1. type `make`
 2. server will be "svr.out"
 3. client will be "cli.out"
 
 #### Run:
-1. type "./svr.out [portno]" on the server side terminal
-2. type "./cli.out [portno]" on the client side terminal
+1. type `./svr.out [portno]` on the server side terminal
+2. type `./cli.out [portno]` on the client side terminal
 
 #### Clean:
-1. type "make clean"
+1. type `make clean`
 
 #### Test:
 1. type example text at "Given: "
