@@ -2,7 +2,7 @@
  *Date:    2/1/2022
  *Class:   CSCE 3530.002
  *Descr:   client side of tcp connection
- *Only runs on the cse machines at my school
+ *Replace "0.0.0.0" with the ip address of the server
 */
 
 #include <sys/socket.h>
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
     servaddr.sin_family = AF_INET;
     portno = atoi(argv[1]);
     servaddr.sin_port = htons(portno);
-    inet_pton(AF_INET,"129.120.151.96",&(servaddr.sin_addr));
+    inet_pton(AF_INET,"0.0.0.0",&(servaddr.sin_addr));
 
     if(connect(sockfd, (struct sockaddr*)&servaddr, sizeof(servaddr))<0){
         printf("connect error\n");
