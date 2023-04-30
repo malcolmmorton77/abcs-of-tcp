@@ -1,8 +1,7 @@
 /*Name:    Malcolm M
  *Section: 3530.002
  *Date:    2/1/2022
- *Descr:   creates a count server for changing a sentence, counting characters in a sentence
- *Only runs on the cse machines at my school
+ *Descr:   creates a count server for changing a sentence and counting characters in a sentence
 */
 
 #include <stdio.h>
