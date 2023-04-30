@@ -3,15 +3,13 @@
 ### Malcolm Morton
 ### Class: Computer Networking
 
-### must run on linux operating system
-
 #### Info:
 - ctserver has a sentence corrector with these functions implemented:
     - changes first letter to uppercase, and rest to lowercase
     - counts the number of spaces in a given sentence/phrase
     - counts the number of letters in a given sentence/phrase
     - counts the number of punctuation marks in a given sentence/phrase
-- provide the sentence/phrase on the client side
+- provide the sentence/phrase to the client
 
 #### Compile:
 1. type `make`
